@@ -14,11 +14,14 @@ const Game = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      let uniqueId = localStorage.getItem('uniqueId');
       const response = await axios.get('https://clicker-game-95zg.onrender.com/api/getUserData', {
+        params: { uniqueId },
         withCredentials: true, 
       });
       setScore(response.data.score);
       setPrizes(response.data.prizes);
+      localStorage.setItem("uniqueId",response?.data?.id || uniqueId);
     };
 
     fetchUserData();
@@ -27,8 +30,10 @@ const Game = () => {
   const handleButtonClick = async () => {
     setLoading(true);
     try {
+      let uniqueId = localStorage.getItem('uniqueId');
       const response = await axios.post('https://clicker-game-95zg.onrender.com/api/clickButton', {}, {
         withCredentials: true,
+        params: { uniqueId },
       });
       setScore(response.data.score);
       setPrizes(response.data.prizes);
