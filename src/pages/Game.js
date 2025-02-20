@@ -14,7 +14,9 @@ const Game = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const response = await axios.get('https://clicker-game-95zg.onrender.com/api/getUserData');
+      const response = await axios.get('https://clicker-game-95zg.onrender.com/api/getUserData', {
+        withCredentials: true, 
+      });
       setScore(response.data.score);
       setPrizes(response.data.prizes);
     };
@@ -25,7 +27,9 @@ const Game = () => {
   const handleButtonClick = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('https://clicker-game-95zg.onrender.com/api/clickButton');
+      const response = await axios.post('https://clicker-game-95zg.onrender.com/api/clickButton', {}, {
+        withCredentials: true,
+      });
       setScore(response.data.score);
       setPrizes(response.data.prizes);
     //   alert(response.data.message);
