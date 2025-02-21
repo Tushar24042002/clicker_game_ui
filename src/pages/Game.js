@@ -17,7 +17,6 @@ const Game = () => {
       let uniqueId = localStorage.getItem('uniqueId');
       const response = await axios.get('https://clicker-game-95zg.onrender.com/api/getUserData', {
         params: { uniqueId },
-        withCredentials: true, 
       });
       setScore(response.data.score);
       setPrizes(response.data.prizes);
@@ -32,7 +31,6 @@ const Game = () => {
     try {
       let uniqueId = localStorage.getItem('uniqueId');
       const response = await axios.post('https://clicker-game-95zg.onrender.com/api/clickButton', {}, {
-        withCredentials: true,
         params: { uniqueId },
       });
       setScore(response.data.score);
